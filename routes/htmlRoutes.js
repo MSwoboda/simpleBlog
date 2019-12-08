@@ -31,7 +31,18 @@ module.exports = function (app) {
     });
 
     // write article page 
-    app.get('/write', (req, res) => { res.render('pages/write', { userName: req.user.userName, edit: false, id: 0, articles: {} }) });
+    app.get('/write', (req, res) => { 
+if ( (typeof (req.user) != "undefined")) {
+    res.render('pages/write', { userName: req.user.userName, edit: false, id: 0, articles: {} }) 
+
+} else {
+    res.render("pages/404")
+} 
+
+
+    
+    
+    });
 
     // edit article page 
     app.get('/write/:id', (req, res) => {
@@ -43,6 +54,7 @@ module.exports = function (app) {
         }).then( (blogDB) => {
             console.log(blogDB[0].dataValues);
             (typeof (req.user) != "undefined") ? userName = req.user.userName : userName = null;
+
             res.render('pages/write', { userName, edit: true, id: req.params.id, articles: blogDB[0].dataValues });
         });
     });
