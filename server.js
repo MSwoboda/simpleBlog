@@ -6,16 +6,11 @@ const passport = require('passport')
 var db = require("./models");
 var app = express();
 
-app.use(session({
-    secret: 'random-text'
-}));
+app.use(session({secret: 'random-text'}));
 
 require('./config/passport')(passport)
 
-
 var PORT = process.env.PORT || 3000;
-
-
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));

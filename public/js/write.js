@@ -5,7 +5,7 @@ $('#summernote').summernote({
     height: 200
 });
 
-$("#article-button").on("click", function(event) {
+$("#article-button").on("click", function (event) {
     console.log("clicked")
     event.preventDefault();
 
@@ -20,16 +20,18 @@ $("#article-button").on("click", function(event) {
     if (!$("#rwFlag").attr("data-val").trim()) {
         console.log("create");
 
+        console.log($("#rwFlag").attr("data-user").trim());
+
         $.ajax({
-                method: "POST",
-                url: "/api/articles",
-                data: {
-                    title: title,
-                    body: body,
-                    author: $("#rwFlag").attr("data-user").trim()
-                }
-            })
-            .then(function() {
+            method: "POST",
+            url: "/api/articles",
+            data: {
+                title: title,
+                body: body,
+                author: $("#rwFlag").attr("data-user").trim()
+            }
+        })
+            .then(function () {
                 console.log("sentreqest");
                 window.location.href = "/";
             });
@@ -38,15 +40,15 @@ $("#article-button").on("click", function(event) {
         console.log("update");
 
         $.ajax({
-                method: "PUT",
-                url: "/api/articles/" + $("#rwFlag").attr("data-reference").trim(),
-                data: {
-                    title: title,
-                    body: body,
-                    author: $("#rwFlag").attr("data-user").trim()
-                }
-            })
-            .then(function() {
+            method: "PUT",
+            url: "/api/articles/" + $("#rwFlag").attr("data-reference").trim(),
+            data: {
+                title: title,
+                body: body,
+                author: $("#rwFlag").attr("data-user").trim()
+            }
+        })
+            .then(function () {
                 console.log("sentreqest");
                 window.location.href = "/";
             });

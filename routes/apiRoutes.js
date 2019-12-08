@@ -48,16 +48,8 @@ module.exports = function (app) {
         });
     });
 
-    // author: DataTypes.STRING,
-    // title: DataTypes.STRING,
-    // body: DataTypes.TEXT,
-    // likes: DataTypes.INTEGER,
-    // user_liked: DataTypes.STRING,
-    // comments: DataTypes.STRING
-
    // Add likes to total 
    app.post("/api/comments/:id", function (req, res) {
-
 
     db.Article.findAll({
         where: {
