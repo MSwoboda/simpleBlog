@@ -1,26 +1,16 @@
-console.log("is loaded");
-
 $('#summernote').summernote({
     tabsize: 2,
     height: 200
 });
 
-$("#article-button").on("click", function (event) {
-    console.log("clicked")
+$("#article-button").on("click", (event) => {
     event.preventDefault();
 
-    var body = $('#summernote').summernote('code');
-    var title = $("#article-title").val().trim();
-
-    console.log(title);
-    console.log(body);
-
-    console.log($("#rwFlag").attr("data-val").trim());
+    let body = $('#summernote').summernote('code');
+    let title = $("#article-title").val().trim();
 
     if (!$("#rwFlag").attr("data-val").trim()) {
-        console.log("create");
 
-        console.log($("#rwFlag").attr("data-user").trim());
 
         $.ajax({
             method: "POST",
@@ -31,13 +21,8 @@ $("#article-button").on("click", function (event) {
                 author: $("#rwFlag").attr("data-user").trim()
             }
         })
-            .then(function () {
-                console.log("sentreqest");
-                window.location.href = "/";
-            });
+            .then(() => window.location.href = "/");
     } else {
-
-        console.log("update");
 
         $.ajax({
             method: "PUT",
@@ -48,10 +33,7 @@ $("#article-button").on("click", function (event) {
                 author: $("#rwFlag").attr("data-user").trim()
             }
         })
-            .then(function () {
-                console.log("sentreqest");
-                window.location.href = "/";
-            });
+            .then(() => window.location.href = "/");
 
     }
 

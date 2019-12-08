@@ -30,25 +30,25 @@ module.exports = function (app) {
         }
     });
 
-    // about page 
-    app.get('/write', (req, res) => { res.render('pages/write', { userName, edit: false, id: 0, articles: {} }) });
+    // write article page 
+    app.get('/write', (req, res) => { res.render('pages/write', { userName: req.user.userName, edit: false, id: 0, articles: {} }) });
 
-    // about page 
-    app.get('/write/:id', function (req, res) {
+    // edit article page 
+    app.get('/write/:id', (req, res) => {
 
         db.Article.findAll({
             where: {
                 id: req.params.id
             }
-        }).then(function (blogDB) {
+        }).then( (blogDB) => {
             console.log(blogDB[0].dataValues);
             (typeof (req.user) != "undefined") ? userName = req.user.userName : userName = null;
             res.render('pages/write', { userName, edit: true, id: req.params.id, articles: blogDB[0].dataValues });
         });
     });
 
-    // about page 
-    app.get('/article/:id', function (req, res) {
+    // article show page
+    app.get('/article/:id', (req, res) => {
 
         console.log(req.params.id);
 
@@ -56,23 +56,21 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             }
-        }).then(function (blogDB) {
+        }).then( (blogDB) => {
             console.log(blogDB[0]);
             (typeof (req.user) != "undefined") ? userName = req.user.userName : userName = null;
             res.render('pages/article', { userName, id: req.params.id, articles: blogDB[0] });
         });
     });
 
-    // about page 
-    app.put('/article/:id', function (req, res) {
+    // about write page 
+    app.put('/article/:id',  (req, res) => {
 
-        console.log(req.params.id);
-
-        db.Article.findAll({
+       db.Article.findAll({
             where: {
                 id: req.params.id
             }
-        }).then(function (blogDB) {
+        }).then( (blogDB) => {
             console.log(blogDB[0].dataValues);
             (typeof (req.user) != "undefined") ? userName = req.user.userName : userName = null;
             res.render('pages/article', { userName, id: req.params.id, articles: blogDB[0].dataValues });

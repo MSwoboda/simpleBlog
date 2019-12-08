@@ -61,6 +61,8 @@ body .demo-blog {
     -webkit-overflow-scrolling: touch;
 }
 
+
+
 .demo-blog .mdl-card {
     display: -webkit-flex;
     display: -ms-flexbox;
